@@ -7,7 +7,8 @@ It is based on [wojtek77/chat](https://github.com/wojtek77/chat), itself based o
 
 - No need for users to register. Just need the web address.
 - On connection, the page is feeded with the 50 last messages.
-- Optional *get* arguments to specify the user name and the room. Example : ...minchat/?name=John&room=Living
+- Optional *get* arguments to specify the user name and the room.    
+Example : `https://yourdomain.org/minchat/?room=Living&name=John`
 - Mono room (for now)
 
 ## Installation
