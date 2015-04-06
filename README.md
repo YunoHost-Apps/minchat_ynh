@@ -15,6 +15,6 @@ It is based on [wojtek77/chat](https://github.com/wojtek77/chat), itself based o
 Via the admin web console, type in: <https://github.com/chtixof/minchat_ynh>  
 Or on ssh : `sudo yunohost app install https://github.com/chtixof/minchat_ynh`
 ### Otherwise
-Download, unzip and just copy the content of the `source` folder to any folder of your web site.
+Download, unzip and just copy the content of the `sources` folder to any folder of your web site.
 ## Screen shot
 ![screenshot](https://raw.githubusercontent.com/chtixof/databank/master/minchat_ynh/minchat_ynh_screenshot01.gif)
