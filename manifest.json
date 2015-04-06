@@ -1,0 +1,39 @@
+{
+    "name": "minchat",
+    "id": "minchat",
+    "description": {
+        "en": "A minimalist web chat",
+        "fr": "Un web chat minimaliste"
+    },
+    "license": "MIT",
+    "developer": {
+        "name": "chtixof"
+    },
+    "multi_instance": "false",
+    "arguments": {
+        "install" : [            {
+                "name": "domain",
+                "ask": {
+                    "en": "Choose a domain for minchat",
+                    "en": "Choisissez un domaine pour minchat"
+                },
+                "example": "domain.org"
+            },{
+                "name": "path",
+                "ask": {
+                    "en": "Choose a path for minchat",
+                    "en": "Choisissez un chemin pour minchat"
+                },
+                "example": "/minchat",
+                "default": "/minchat"
+            },{
+                "name": "ispublic",
+                "ask": {
+                    "en": "Is it a public site (Y)",
+                    "en": "Taper Y si le site est public"
+                },
+                "example": "Y",
+                "default": "Y"
+            } ]
+    }
+}
