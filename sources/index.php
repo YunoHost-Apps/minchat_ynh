@@ -1,5 +1,4 @@
 <?php
-
 function v($v, $czyscHtmlIExit = false) {
 	if ($czyscHtmlIExit) ob_end_clean();
     echo '<pre>' . print_r($v, true) . '</pre>';
@@ -20,79 +19,80 @@ function vvv($var, & $result = null, $is_view = true)
     if ($is_view) v($result);
 }
 
-
-
-function loginForm() {
-    echo'
-	<div id="loginform">
-	<form action="" method="post">
-		<p>Please enter your name to continue:</p>
-		<label for="name">Name:</label>
-		<input type="text" name="name" id="name"/>
-		<input type="submit" name="enter" id="enter" value="Enter" />
-	</form>
-	</div>
-	';
-}
-
-function getSetup($key = null) {
-    $arr = parse_ini_file('setup.ini');
-    return isset($key) ? $arr[$key] : $arr;
+function getarr($arr,$key,$default) {
+    return isset($arr[$key]) ? $arr[$key] : $default;
 }
 
 function deleteOldHistory() {
-    $expireHistory = getSetup('expire_history');
-    $expireDate = date('Y-m-d', strtotime("-$expireHistory day"));
+    $expireDate = date('Y-m-d', strtotime("-1 day"));
     foreach (glob('./history/*') as $f) {
-        if (basename($f) < $expireDate) {
+        if (substr(basename($f),-10) < $expireDate) {
             unlink($f);
         }
     }
 }
 
 //-------------------------
+// init setup.ini parms
+  $ini = parse_ini_file('conf/setup.ini');
+  $interval= getarr($ini,'interval',2500);
+  $delay= $interval+getarr($ini,'cache',60000);
+  $auth= explode(',',getarr($ini,'auth',''));
 
-session_start();
-
-if (isset($_GET['logout'])) {
-    session_destroy();
-    header("Location: ./"); //Redirect the user
-}
-
+// read args
+$name="";
 if (isset($_REQUEST['name'])) {
-    if ($_REQUEST['name'] != "") {
-        $_SESSION['name'] = stripslashes(htmlspecialchars($_REQUEST['name']));
-    } else {
-        echo '<span class="error">Please type in a name</span>';
-    }
+   $name = stripslashes(htmlspecialchars($_REQUEST['name']));
 }
+$room="";
 if (isset($_REQUEST['room'])) {
-  $room = $_REQUEST['room'];
-} else {
-  $room = "";
+   $room = stripslashes(htmlspecialchars($_REQUEST['room']));
 }
+
+// check args
+if ($name.$room=="") {
+  // no args
+  $prompt = "Please fill in the form to continue:";
+} else {
+  if ($name=="")  {$prompt = "<em>User name missing.</em>";}
+  else if ($room=="") {$prompt="<em>Room missing.</em>";}
+  else if (in_array($name.":".$room,$auth)) {$prompt="";}
+  else if (in_array(":".$room,$auth)) {$prompt="";}
+  else if (in_array($name.":",$auth)) {$prompt="";}
+  else {$prompt="<em>User not authorized to this room.</em>";}
+}
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Chat - Customer Module</title>
+        <title>Minchat - <?php echo $room; ?> room</title>
         <link type="text/css" rel="stylesheet" href="style.css" />
     </head>
 
     <?php
-    if (!isset($_SESSION['name'])) {
-        loginForm();
-        deleteOldHistory();
+    if ($prompt!="") {
+// Form to get args
+      echo'<div id="loginform"><p>';
+      echo $err;
+      echo $prompt;
+      echo '</p><form action="" method="get" class="tform"><p><label for="name">Name:</label><input type="text" name="name" id="name" value="';
+      echo $name;
+      echo '"/></p>';
+      echo '<p><label for="room">Room:</label><input type="text" name="room" id="room" value="';
+      echo $room;
+      echo '"/></p>';
+      echo '<br/><input type="submit" value="Enter" /></p></form></div>';
     } else {
+      deleteOldHistory();
+// Enter the room
         ?>
         <div id="wrapper">
             <div id="menu">
-                <p class="welcome">Welcome to the <b><?php echo $room; ?></b> room, <b><?php echo $_SESSION['name']; ?></b></p>
+                <p class="welcome">Welcome to the <b><?php echo $room; ?></b> room, <b><?php echo $name; ?></b></p>
                 <div style="clear:both"></div>
             </div>	
-            <div id="chatbox"><?php
-        ?></div>
-
+            <div id="chatbox"></div>
             <form name="message" action="">
                 <input name="usermsg" type="text" id="usermsg" size="63" autocomplete="off"  autofocus/>
                 <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
@@ -111,7 +111,7 @@ if (isset($_REQUEST['room'])) {
                     $.ajax({
                         type: 'POST',
                         url: 'post.php',
-                        data: {text: clientmsg},
+                        data: {text: clientmsg,name:'<?php echo $name; ?>',room:'<?php echo $room; ?>',delay:'<?php echo $delay; ?>'},
                         //cache: false,
                         async: false,
                         success: function(data) {
@@ -130,7 +130,7 @@ if (isset($_REQUEST['room'])) {
                     $.ajax({
                         type: 'POST',
                         url: 'server.php',
-                        data: {id: id},
+                        data: {id: id,room:'<?php echo $room; ?>'},
                         dataType: 'json',
                         //cache: false,
                         async: false,
@@ -155,19 +155,10 @@ if (isset($_REQUEST['room'])) {
                     });
                 }
                 loadLog();
-                setInterval(loadLog, <?php echo getSetup('interval') ?>);	//Reload file every 2.5 seconds
+                setInterval(loadLog, <?php echo $interval ?>);	//Reload file every $interval ms
 
-                //If user wants to end session
-                $("#exit").click(function() {
-                    var exit = confirm("Are you sure you want to end the session?");
-                    if (exit == true) {
-                        window.location = 'index.php?logout=true';
-                    }
-                });
             });
         </script>
-        <?php
-    }
-    ?>
+<?php } ?>
 </body>
 </html>

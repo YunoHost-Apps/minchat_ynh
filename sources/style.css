@@ -9,7 +9,8 @@ body {
     height: 100%;
     font: 100% arial;
     margin: 0;
-    padding: 0; }
+    padding: 0; 
+    background: #d8d8d8;}
 
 p, span {
     margin: 0;
@@ -69,3 +70,9 @@ a:hover { text-decoration: underline; }
 .logout { float: right; }
 
 .msgln { margin:0 0 2px 0; }
+
+.tform  { display: table;      }
+.tform p     { display: table-row;  }
+.tform label { display: table-cell; }
+.tform input { display: table-cell; }
+em {color:red;}

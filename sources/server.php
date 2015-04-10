@@ -20,21 +20,23 @@ function vvv($var, & $result = null, $is_view = true)
     if ($is_view) v($result);
 }
 
-//$_POST['id'] = '1305177620-53c14f147c456';
-if (!isset($_POST['id'])) return;
+$id = isset($_POST['id']) ? $_POST['id'] : '';
+$room = isset($_POST['room']) ? $_POST['room'] : '';
+
+if ($id === '' || $room === '') return;
+
 $isApc = extension_loaded('apc');
-$id = $_POST['id'];
-$cache = $isApc ? apc_fetch('chat') : @unserialize(file_get_contents('./tmp/cache'));
+$cache = $isApc ? apc_fetch('chat') : @unserialize(file_get_contents('./history/'.$room.'cache2100-01-01'));
 $data = array();
 if ($id === 'undefined') {
     $id = empty($cache) ? 0 : $cache[0][0];
 // first refresh : loads 50 last msg from history    
-    $file = './history/'.date('Y-m-d');
+    $file = './history/'.$room.date('Y-m-d');
     if (file_exists($file)) { 
       $history = file($file, FILE_IGNORE_NEW_LINES);
       $history = array_reverse($history);
       foreach ($history as & $ref) {
-          $ref = explode('&', $ref);
+          $ref = explode('>', $ref);
       }
       $data = array_slice($history, 0, 50);
     }  
@@ -56,14 +58,14 @@ if ($id === 'undefined') {
     else {
         $date = date('Y-m-d');
         $history = array();
-        while (($history = array_merge(file('./history/'.$date, FILE_IGNORE_NEW_LINES), $history)) && $history[0] > $id) {
+        while (($history = array_merge(file('./history/'.$room.$date, FILE_IGNORE_NEW_LINES), $history)) && $history[0] > $id) {
             $date = date('Y-m-d', strtotime('-1 day', strtotime($date)));
-            if (!file_exists('./history/'.$date)) break;
+            if (!file_exists('./history/'.$room.$date)) break;
         }
         // prepare history
         $history = array_reverse($history);
         foreach ($history as & $ref) {
-            $ref = explode('&', $ref);
+            $ref = explode('>', $ref);
         }
         // get data
         foreach ($history as $k => $h) {

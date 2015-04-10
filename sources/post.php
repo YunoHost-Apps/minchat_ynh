@@ -20,39 +20,28 @@ function vvv($var, & $result = null, $is_view = true)
     if ($is_view) v($result);
 }
 
-
-
-function getSetup($key = null) {
-    $arr = parse_ini_file('setup.ini');
-    return isset($key) ? $arr[$key] : $arr;
-}
-
-
-
-//$_POST['text'] = 'abc';
-session_start();
-if (!isset($_SESSION['name'])) return;
 $text = isset($_POST['text']) ? $_POST['text'] : '';
-if ($text === '') return;
+$name = isset($_POST['name']) ? $_POST['name'] : '';
+$room = isset($_POST['room']) ? $_POST['room'] : '';
+$delay = isset($_POST['delay']) ? $_POST['delay'] : '';
+
+if ($text === '' || $name === '' || $room === '' || $delay === '') return;
 
 $isApc = extension_loaded('apc');
 
-$setup = getSetup();
 $time = time();
 $date = date('Y-m-d', $time);
 $uniqid = uniqid();
 $id = $time.'-'.$uniqid;
 
-$tmpDir = './tmp/';
 $historyDir = './history/';
 
-$tmpFile = $tmpDir.'cache';
-$historyFile = $historyDir.$date;
+$tmpFile = $historyDir.$room.'cache2100-01-01';
+$historyFile = $historyDir.$room.$date;
 
 $fh = @fopen($historyFile, 'a');
 if ($fh === false) {
     mkdir($historyDir);
-    if (!is_dir($tmpDir)) mkdir($tmpDir);
     $fh = @fopen($historyFile, 'a');
 }
 
@@ -60,10 +49,10 @@ if ($fh === false) {
 flock($fh, LOCK_EX);
 
 // data
-$data = array($id, $_SESSION['name'], stripslashes(htmlspecialchars($text)));
+$data = array($id, $name, stripslashes(htmlspecialchars($text)));
 
 // write history
-fwrite($fh, implode('&', $data)."\n");
+fwrite($fh, implode('>', $data)."\n");
 
 // cache
 if ($isApc) {
@@ -83,7 +72,7 @@ if ($isApc) {
 array_unshift($cache, $data);
 
 // delete expired cache
-$expireTime = floor($time - $setup['interval']/1000 - $setup['expire_cache']);
+$expireTime = floor($time - $delay);
 foreach (array_reverse($cache,true) as $k => $e) {
     if ($e[0] < $expireTime) {
         unset($cache[$k]);
