@@ -25,7 +25,7 @@ $name = isset($_POST['name']) ? $_POST['name'] : '';
 $room = isset($_POST['room']) ? $_POST['room'] : '';
 $delay = isset($_POST['delay']) ? $_POST['delay'] : '';
 
-if ($text === '' || $name === '' || $room === '' || $delay === '') return;
+if ($text === '' || $name === '' || $delay === '') return;
 
 $isApc = extension_loaded('apc');
 

@@ -23,7 +23,7 @@ function vvv($var, & $result = null, $is_view = true)
 $id = isset($_POST['id']) ? $_POST['id'] : '';
 $room = isset($_POST['room']) ? $_POST['room'] : '';
 
-if ($id === '' || $room === '') return;
+if ($id === '' ) return;
 
 $isApc = extension_loaded('apc');
 $cache = $isApc ? apc_fetch('chat') : @unserialize(file_get_contents('./history/'.$room.'cache2100-01-01'));

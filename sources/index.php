@@ -49,13 +49,19 @@ if (isset($_REQUEST['room'])) {
    $room = stripslashes(htmlspecialchars($_REQUEST['room']));
 }
 
+// no auth = single room = no room specified
+if ($auth[0]==""){$room="";}
+
 // check args
 if ($name.$room=="") {
   // no args
   $prompt = "Please fill in the form to continue:";
 } else {
   if ($name=="")  {$prompt = "<em>User name missing.</em>";}
-  else if ($room=="") {$prompt="<em>Room missing.</em>";}
+  else if ($room=="") {
+    if ($auth[0]==""){$prompt="";}
+    else {$prompt="<em>Room missing.</em>";}
+  } 
   else if (in_array($name.":".$room,$auth)) {$prompt="";}
   else if (in_array(":".$room,$auth)) {$prompt="";}
   else if (in_array($name.":",$auth)) {$prompt="";}
@@ -79,9 +85,11 @@ if ($name.$room=="") {
       echo '</p><form action="" method="get" class="tform"><p><label for="name">Name:</label><input type="text" name="name" id="name" value="';
       echo $name;
       echo '"/></p>';
-      echo '<p><label for="room">Room:</label><input type="text" name="room" id="room" value="';
-      echo $room;
-      echo '"/></p>';
+      if ($auth[0]!==""){
+        echo '<p><label for="room">Room:</label><input type="text" name="room" id="room" value="';
+        echo $room;
+        echo '"/></p>';
+      }
       echo '<br/><input type="submit" value="Enter" /></p></form></div>';
     } else {
       deleteOldHistory();
