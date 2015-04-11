@@ -86,10 +86,24 @@ if ($name.$room=="") {
         </div>
         <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
         <script type="text/javascript">
+// regexp used by fonction lienurl
+function replacer(match, p1,p2,p3, offset, string){
+  if (p1.match(/\.(png|jpg|jpeg|gif)$/)) {
+    return(' <img src="' + p1 + '" />');
+  } else {
+    return ' <a href="' + p1 + '">' + p1 + '</a>';
+  }       
+}
+// remplace les url précédées d'un espace par un lien 
+function lienurl(s){
+  return s.replace(/\s(https?:\/\/([-\w\.]+[-\w]+(:\d+)?(\/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?))/g,replacer);
+}
+
             $(document).ready(function() {
                 var id = 'undefined';
                 var pos = 0;
                 var lastdate = 0;
+                var oldscrollHeight = $("#chatbox")[0].scrollHeight;
 
                 $("#submitmsg").click(function() {
                     var clientmsg = $("#usermsg").val();
@@ -111,7 +125,6 @@ if ($name.$room=="") {
                 });
 
                 function loadLog() {
-                    var oldscrollHeight = $("#chatbox")[0].scrollHeight;
                     $.ajax({
                         type: 'POST',
                         url: 'server.php',
@@ -130,6 +143,9 @@ if ($name.$room=="") {
                                         +"("+heure+") <b>"
                                         +data.data[k][1]+"</b>: "+data.data[k][2]+"<br>";
                             }
+
+                            html=lienurl(html);
+
                             if (pos==0 && heure!=''){
                                html='<b>----- '+date.toLocaleDateString()+' -----</b><br>'+html;
                             } 
