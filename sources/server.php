@@ -11,16 +11,19 @@ if (!ctype_digit($pos) || !file_exists($file)) return;
 settype($pos, "integer");
 settype($lastdate, "integer");
 
-if ($date!=date('Y-m-d',$lastdate)) $pos=0;
-
 $data = array();
-$fh =fopen($file, "r");
 
-if (fseek($fh, $pos)==0) {
-  $i=0;
-  while($lig=fgets($fh)){ $data[$i++] = explode('>', $lig); }
-  $pos =ftell($fh);
-  echo json_encode(array('pos' => $pos, 'data' => $data));
+if ($pos!=0 && $date!=date('Y-m-d',$lastdate)) {
+  $pos=0;
+} else {
+  $fh =fopen($file, "r");
+  
+  if (fseek($fh, $pos)==0) {
+    $i=0;
+    while($lig=fgets($fh)){ $data[$i++] = explode('>', $lig); }
+    $pos =ftell($fh);
+  }
 }
+echo json_encode(array('pos' => $pos, 'data' => $data));
 
 ?>

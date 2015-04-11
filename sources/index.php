@@ -119,17 +119,22 @@ if ($name.$room=="") {
                         dataType: 'json',
                         async: false,
                         success: function(data) {
-                            pos = data.pos;
-                            var html = '';
+                            var html='';
                             var date;
+                            var heure='';
                             for (var k in data.data) {
                                 lastdate = data.data[k][0];
                                 date = new Date(parseInt(lastdate)*1000);
-                                date = date.toLocaleTimeString().substr(0,5);
+                                heure = date.toLocaleTimeString().substr(0,5);
                                 html = html
-                                        +"("+date+") <b>"
+                                        +"("+heure+") <b>"
                                         +data.data[k][1]+"</b>: "+data.data[k][2]+"<br>";
                             }
+                            if (pos==0 && heure!=''){
+                               html='<b>----- '+date.toLocaleDateString()+' -----</b><br>'+html;
+                            } 
+                            pos = data.pos;
+
                             $("#chatbox").append(html); 
                             var newscrollHeight = $("#chatbox")[0].scrollHeight;
                             if (newscrollHeight > oldscrollHeight) {
