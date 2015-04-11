@@ -1,79 +1,26 @@
 <?php
 
-function v($v, $czyscHtmlIExit = false) {
-	if ($czyscHtmlIExit) ob_end_clean();
-    echo '<pre>' . print_r($v, true) . '</pre>';
-	if ($czyscHtmlIExit) exit;
-}
-function vv($v, $czyscHtmlIExit = false) {
-	if ($czyscHtmlIExit) ob_end_clean();
-    echo '<pre>';
-	var_dump($v);
-	echo '</pre>';
-	if ($czyscHtmlIExit) exit;
-}
-function vvv($var, & $result = null, $is_view = true)
-{
-    if (is_array($var) || is_object($var)) foreach ($var as $key=> $value) vvv($value, $result[$key], false);
-    else $result = $var;
+$pos = isset($_REQUEST['pos']) ? $_REQUEST['pos'] : '';
+$lastdate = isset($_REQUEST['lastdate']) ? $_REQUEST['lastdate'] : '';
+$room = isset($_REQUEST['room']) ? $_REQUEST['room'] : '';
+$date = date('Y-m-d');
+$file = './history/'.$room.$date;
 
-    if ($is_view) v($result);
-}
+if (!ctype_digit($pos) || !file_exists($file)) return;
 
-$id = isset($_POST['id']) ? $_POST['id'] : '';
-$room = isset($_POST['room']) ? $_POST['room'] : '';
+settype($pos, "integer");
+settype($lastdate, "integer");
 
-if ($id === '' ) return;
+if ($date!=date('Y-m-d',$lastdate)) $pos=0;
 
-$isApc = extension_loaded('apc');
-$cache = $isApc ? apc_fetch('chat') : @unserialize(file_get_contents('./history/'.$room.'cache2100-01-01'));
 $data = array();
-if ($id === 'undefined') {
-    $id = empty($cache) ? 0 : $cache[0][0];
-// first refresh : loads 50 last msg from history    
-    $file = './history/'.$room.date('Y-m-d');
-    if (file_exists($file)) { 
-      $history = file($file, FILE_IGNORE_NEW_LINES);
-      $history = array_reverse($history);
-      foreach ($history as & $ref) {
-          $ref = explode('>', $ref);
-      }
-      $data = array_slice($history, 0, 50);
-    }  
-} elseif ($id === '0') {
-    if (!empty($cache)) {
-        $id = $cache[0][0];
-        $data = $cache;
-    }
-} else {
-    $end = end($cache);
-    // read data from cache
-    if ($id >= $end[0]) {
-        foreach ($cache as $k => $c) {
-            if ($c[0] === $id) break;
-        }
-        $data = array_slice($cache, 0, $k);
-    }
-    // read data from history (any problem witch Internet and are delays)
-    else {
-        $date = date('Y-m-d');
-        $history = array();
-        while (($history = array_merge(file('./history/'.$room.$date, FILE_IGNORE_NEW_LINES), $history)) && $history[0] > $id) {
-            $date = date('Y-m-d', strtotime('-1 day', strtotime($date)));
-            if (!file_exists('./history/'.$room.$date)) break;
-        }
-        // prepare history
-        $history = array_reverse($history);
-        foreach ($history as & $ref) {
-            $ref = explode('>', $ref);
-        }
-        // get data
-        foreach ($history as $k => $h) {
-            if ($h[0] === $id) break;
-        }
-        $data = array_slice($history, 0, $k);
-    }
-    $id = $cache[0][0];
+$fh =fopen($file, "r");
+
+if (fseek($fh, $pos)==0) {
+  $i=0;
+  while($lig=fgets($fh)){ $data[$i++] = explode('>', $lig); }
+  $pos =ftell($fh);
+  echo json_encode(array('pos' => $pos, 'data' => $data));
 }
 
-echo json_encode(array('id' => $id, 'data' => $data));
+?>

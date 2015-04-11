@@ -1,24 +1,4 @@
 <?php
-function v($v, $czyscHtmlIExit = false) {
-	if ($czyscHtmlIExit) ob_end_clean();
-    echo '<pre>' . print_r($v, true) . '</pre>';
-	if ($czyscHtmlIExit) exit;
-}
-function vv($v, $czyscHtmlIExit = false) {
-	if ($czyscHtmlIExit) ob_end_clean();
-    echo '<pre>';
-	var_dump($v);
-	echo '</pre>';
-	if ($czyscHtmlIExit) exit;
-}
-function vvv($var, & $result = null, $is_view = true)
-{
-    if (is_array($var) || is_object($var)) foreach ($var as $key=> $value) vvv($value, $result[$key], false);
-    else $result = $var;
-
-    if ($is_view) v($result);
-}
-
 function getarr($arr,$key,$default) {
     return isset($arr[$key]) ? $arr[$key] : $default;
 }
@@ -32,11 +12,9 @@ function deleteOldHistory() {
     }
 }
 
-//-------------------------
 // init setup.ini parms
   $ini = parse_ini_file('conf/setup.ini');
   $interval= getarr($ini,'interval',2500);
-  $delay= $interval+getarr($ini,'cache',60000);
   $auth= explode(',',getarr($ini,'auth',''));
 
 // read args
@@ -108,10 +86,11 @@ if ($name.$room=="") {
         </div>
         <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
         <script type="text/javascript">
-            // jQuery Document
             $(document).ready(function() {
                 var id = 'undefined';
-                //If user submits the form
+                var pos = 0;
+                var lastdate = 0;
+
                 $("#submitmsg").click(function() {
                     var clientmsg = $("#usermsg").val();
                     $("#usermsg").val('');
@@ -119,8 +98,7 @@ if ($name.$room=="") {
                     $.ajax({
                         type: 'POST',
                         url: 'post.php',
-                        data: {text: clientmsg,name:'<?php echo $name; ?>',room:'<?php echo $room; ?>',delay:'<?php echo $delay; ?>'},
-                        //cache: false,
+                        data: {text: clientmsg,name:'<?php echo $name; ?>',room:'<?php echo $room; ?>'},
                         async: false,
                         success: function(data) {
                             loadLog();
@@ -132,32 +110,30 @@ if ($name.$room=="") {
                     return false;
                 });
 
-                //Load the file containing the chat log
                 function loadLog() {
                     var oldscrollHeight = $("#chatbox")[0].scrollHeight;
                     $.ajax({
                         type: 'POST',
                         url: 'server.php',
-                        data: {id: id,room:'<?php echo $room; ?>'},
+                        data: {room:'<?php echo $room; ?>', pos: pos, lastdate: lastdate},
                         dataType: 'json',
-                        //cache: false,
                         async: false,
                         success: function(data) {
-                            id = data.id;
+                            pos = data.pos;
                             var html = '';
                             var date;
-                            for (var k in data.data.reverse()) {
-                                date = new Date(parseInt(data.data[k][0])*1000);
-                                date = date.toLocaleTimeString();
-                                date = date.replace(/([\d]+\D+[\d]{2})\D+[\d]{2}(.*)/, '$1$2');
+                            for (var k in data.data) {
+                                lastdate = data.data[k][0];
+                                date = new Date(parseInt(lastdate)*1000);
+                                date = date.toLocaleTimeString().substr(0,5);
                                 html = html
-                                        +"<div class='msgln'>("+date+") <b>"
-                                        +data.data[k][1]+"</b>: "+data.data[k][2]+"<br></div>";
+                                        +"("+date+") <b>"
+                                        +data.data[k][1]+"</b>: "+data.data[k][2]+"<br>";
                             }
-                            $("#chatbox").append(html); //Insert chat messages into the #chatbox div
+                            $("#chatbox").append(html); 
                             var newscrollHeight = $("#chatbox")[0].scrollHeight;
                             if (newscrollHeight > oldscrollHeight) {
-								$("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
+								               $("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
                             }
                         },
                     });
