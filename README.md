@@ -33,5 +33,5 @@ In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Pub
 ![screenshot](https://raw.githubusercontent.com/chtixof/databank/master/minchat_ynh/minchat_ynh_screenshot01.gif)
 
 ## Hints for users
-- The URLs you send are linked or transformed to images when preceeding by a !
+- The URLs you send are linked or transformed to images when preceeded by a !
 - If multiple rooms are allowed by the administrator in the setup.ini, you can have several tabs opened to different rooms in the same browser
