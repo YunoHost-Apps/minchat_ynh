@@ -21,12 +21,13 @@ Download, unzip and just copy the content of the `sources` folder to any folder 
 ## Setup
 The setup is optional. If you leave it as is, there is a single unnamed room, opened to all users. If you want to customize the access control, edit the file `conf/setup.ini`. The interesting parameter is `auth` that indicates which user is authorized to which room.
 
-In this example `auth = John:Game,Mary:Game,John:Family,Tim:Family,admin:,:Public`,
-- John can access the Game room, the Family room and the Public room
-- Mary can access the Game room and the Public room
-- Tim can access the Family room and the Public room
-- admin can access all rooms
-- other users can only acccess the Public room
+In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Public,*:`,
+- `John:Game,John:Family' = John can access the Game room, the Family room and the Public room
+- `Mary:Game' = Mary can access the Game room and the Public room
+- `Tim:Family' = Tim can access the Family room and the Public room
+- `admin:*' = admin can access all rooms
+- `*:Public' = everybody can only acccess the Public room
+- `*:' = everybody  can access the unnamed room
 
 ## Screen shot
 ![screenshot](https://raw.githubusercontent.com/chtixof/databank/master/minchat_ynh/minchat_ynh_screenshot01.gif)

@@ -15,7 +15,7 @@ function deleteOldHistory() {
 // init setup.ini parms
   $ini = parse_ini_file('conf/setup.ini');
   $interval= getarr($ini,'interval',2500);
-  $auth= explode(',',getarr($ini,'auth',''));
+  $auth= explode(',',getarr($ini,'auth','*:'));
 
 // read args
 $name="";
@@ -35,14 +35,15 @@ if ($name.$room=="") {
   // no args
   $prompt = "Please fill in the form to continue:";
 } else {
+// user name mandatory in any case
   if ($name=="")  {$prompt = "<em>User name missing.</em>";}
   else if ($room=="") {
-    if ($auth[0]==""){$prompt="";}
+// room not mandatory depending on setup  
+    if (in_array("*:",$auth)||in_array($name.":",$auth)){$prompt="";}
     else {$prompt="<em>Room missing.</em>";}
-  } 
-  else if (in_array($name.":".$room,$auth)) {$prompt="";}
-  else if (in_array(":".$room,$auth)) {$prompt="";}
-  else if (in_array($name.":",$auth)) {$prompt="";}
+  }
+// here we have both room and user 
+  else if (in_array($name.":".$room,$auth)||in_array("*:".$room,$auth)||in_array($name.":*",$auth)||in_array("*:*",$auth)) {$prompt="";}
   else {$prompt="<em>User not authorized to this room.</em>";}
 }
 
