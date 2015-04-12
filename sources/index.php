@@ -86,17 +86,17 @@ if ($name.$room=="") {
         </div>
         <script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
         <script type="text/javascript">
-// regexp used by fonction lienurl
+// add link or img
 function replacer(match, p1,p2,p3, offset, string){
-  if (p1.match(/\.(png|jpg|jpeg|gif)$/)) {
-    return(' <img src="' + p1 + '" />');
+  if (p1.charAt(0)=='!') {
+    return(' <img src="' + p1.substr(1) + '" />');
   } else {
     return ' <a href="' + p1 + '">' + p1 + '</a>';
   }       
 }
-// remplace les url précédées d'un espace par un lien 
+// scans URLS 
 function lienurl(s){
-  return s.replace(/\s(https?:\/\/([-\w\.]+[-\w]+(:\d+)?(\/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?))/g,replacer);
+  return s.replace(/\s(!?https?:\/\/([-\w\.]+[-\w]+(:\d+)?(\/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?))/g,replacer);
 }
 
             $(document).ready(function() {
