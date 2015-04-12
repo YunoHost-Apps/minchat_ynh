@@ -13,10 +13,10 @@ Example : `https://yourdomain.org/minchat/?room=Living&name=John`
 - Optionaly multi room
 
 ## Installation
-### On Yunohost
+#### On Yunohost
 Via the admin web console, type in: <https://github.com/chtixof/minchat_ynh>  
 Or on ssh : `sudo yunohost app install https://github.com/chtixof/minchat_ynh`
-### Otherwise
+#### Otherwise
 Download, unzip and just copy the content of the `sources` folder to any folder of your web site.
 ## Setup
 The setup is optional. If you leave it as is, there is a single unnamed room, opened to all users. If you want to customize the access control, edit the file `conf/setup.ini`. The interesting parameter is `auth` that indicates which user is authorized to which room.
@@ -30,3 +30,7 @@ In this example `auth = John:Game,Mary:Game,John:Family,Tim:Family,admin:,:Publi
 
 ## Screen shot
 ![screenshot](https://raw.githubusercontent.com/chtixof/databank/master/minchat_ynh/minchat_ynh_screenshot01.gif)
+
+## Hints for users
+- The URLs you send are linked or transformed to images when preceeding by a !
+- If multiple rooms are allowed by the administrator in the setup.ini, you can have several tabs opened to different rooms in the same browser
