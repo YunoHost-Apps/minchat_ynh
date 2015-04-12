@@ -26,7 +26,7 @@ In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Pub
 - `Mary:Game` = Mary can access the Game room 
 - `Tim:Family` = Tim can access the Family room 
 - `admin:*` = admin can access all rooms
-- `*:Public` = everybody can only acccess the Public room
+- `*:Public` = everybody can acccess the Public room
 - `*:` = everybody  can access the unnamed room
 
 ## Screen shot
