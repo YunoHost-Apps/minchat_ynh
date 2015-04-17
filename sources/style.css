@@ -46,13 +46,13 @@ a:hover { text-decoration: underline; }
 #loginform p { margin: 5px; }
 
 #chatbox {
-    text-align: left;
-    margin: 0 50px;
-    padding: 0.5em 1ex 0.1em;
-    background: #FEFFF4;
-    height: calc(100% - 120px);
-    border: 1px solid #C7C7C7;
-    overflow: auto; }
+  background: #FEFFF4;
+  position: absolute;
+  bottom: 80px;
+  right: 50px;
+  left: 50px;  overflow-y: scroll;
+  max-height: calc(100% - 140px);
+  padding: .5em;   }
 
 #usermsg {
    width: calc(100% - 100px);
@@ -74,3 +74,4 @@ a:hover { text-decoration: underline; }
 .tform label { display: table-cell; }
 .tform input { display: table-cell; }
 em {color:red;}
+#content{height: calc(100% - 120px); }

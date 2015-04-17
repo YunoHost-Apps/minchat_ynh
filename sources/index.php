@@ -79,7 +79,9 @@ if ($name.$room=="") {
                 <p class="welcome">Welcome to the <b><?php echo $room; ?></b> room, <b><?php echo $name; ?></b></p>
                 <div style="clear:both"></div>
             </div>	
+            <div id="content">
             <div id="chatbox"></div>
+            </div>
             <form name="message" action="">
                 <input name="usermsg" type="text" id="usermsg" size="63" autocomplete="off"  autofocus/>
                 <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
@@ -101,9 +103,9 @@ function lienurl(s){
 }
 
             $(document).ready(function() {
-                var id = 'undefined';
                 var pos = 0;
                 var lastdate = 0;
+                var lastday='';
                 var oldscrollHeight = $("#chatbox")[0].scrollHeight;
 
                 $("#submitmsg").click(function() {
@@ -136,6 +138,7 @@ function lienurl(s){
                             var html='';
                             var date;
                             var heure='';
+                            var day='';
                             for (var k in data.data) {
                                 lastdate = data.data[k][0];
                                 date = new Date(parseInt(lastdate)*1000);
@@ -147,16 +150,29 @@ function lienurl(s){
 
                             html=lienurl(html);
 
-                            if (pos==0 && heure!=''){
-                               html='<b>----- '+date.toLocaleDateString()+' -----</b><br>'+html;
-                            } 
-                            pos = data.pos;
-
-                            $("#chatbox").append(html); 
+                            if (html!=""){
+                              if (pos==0){
+                                 day = date.toLocaleDateString();
+                                 if (day!=lastday){
+                                   $("#chatbox").append('<b>----- '+day+' -----</b><br>');
+                                   if (data.pos==0) {
+                                     $("#chatbox").append('<span id="nomsg">No message yet. Enter yours!<br></span>');
+                                   }
+                                   lastday=day;
+                                 }
+                                 if (data.pos>0) {
+                                   $("#nomsg").remove();
+                                 } else {
+                                   html="";
+                                 }
+                              } 
+                              $("#chatbox").append(html); 
+                            }
                             var newscrollHeight = $("#chatbox")[0].scrollHeight;
                             if (newscrollHeight > oldscrollHeight) {
-								               $("#chatbox").scrollTop($("#chatbox")[0].scrollHeight);
+								               $("#chatbox").scrollTop(newscrollHeight);
                             }
+                            pos = data.pos;
                         },
                     });
                 }
