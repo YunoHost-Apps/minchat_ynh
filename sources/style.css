@@ -65,8 +65,6 @@ a:hover { text-decoration: underline; }
 
 #menu { padding: 12.5px 25px 12.5px 25px; }
 
-.welcome { float: left; }
-
 .logout { float: right; }
 
 .tform  { display: table;      }

@@ -76,8 +76,14 @@ if ($name.$room=="") {
         ?>
         <div id="wrapper">
             <div id="menu">
-                <p class="welcome">Welcome to the <b><?php echo $room; ?></b> room, <b><?php echo $name; ?></b></p>
-                <div style="clear:both"></div>
+            <div style="float:right">Alert on new message:
+              <select id="whenal">
+                <option value="alno">never</option>
+                <option value="alwnf">when not in focus</option>
+                <option value="alyes">always</option>
+              </select>
+            </div>
+            <p class="welcome">Welcome to the <b><?php echo $room; ?></b> room, <b><?php echo $name; ?></b></p>
             </div>	
             <div id="content">
             <div id="chatbox"></div>
@@ -103,10 +109,18 @@ function lienurl(s){
 }
 
             $(document).ready(function() {
+                var doalert=false; // pas d'alerte au chargement init
                 var pos = 0;
                 var lastdate = 0;
                 var lastday='';
                 var oldscrollHeight = $("#chatbox")[0].scrollHeight;
+                var whenal=localStorage.getItem('whenal');
+                if (whenal===null) whenal="alno";
+                $("#whenal").val(whenal);
+                $("#whenal").change(function(){
+                  whenal=$("#whenal").val();
+                  localStorage.setItem('whenal',whenal);
+                });
 
                 $("#submitmsg").click(function() {
                     var clientmsg = $("#usermsg").val();
@@ -118,7 +132,8 @@ function lienurl(s){
                         data: {text: clientmsg,name:'<?php echo $name; ?>',room:'<?php echo $room; ?>'},
                         async: false,
                         success: function(data) {
-                            loadLog();
+                            doalert=false;
+                            loadLog();  // pas d'alerte si propre message
                         },
                         error: function(request, status, error) {
                             $("#usermsg").val(clientmsg);
@@ -166,7 +181,12 @@ function lienurl(s){
                                    html="";
                                  }
                               } 
-                              $("#chatbox").append(html); 
+                              $("#chatbox").append(html);
+                              if (doalert &&(whenal=="alyes" || ((whenal!=="alno") && !document.hasFocus()))){ 
+                                alert('New message!');
+                              }
+                              doalert=true;   // par défaut, alerte pour les autres cas
+                               
                             }
                             var newscrollHeight = $("#chatbox")[0].scrollHeight;
                             if (newscrollHeight > oldscrollHeight) {
