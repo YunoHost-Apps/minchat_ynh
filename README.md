@@ -16,6 +16,10 @@ Example : `https://yourdomain.org/minchat/?room=Living&name=John`
 #### On Yunohost
 Via the admin web console, type in: <https://github.com/chtixof/minchat_ynh>  
 Or on ssh : `sudo yunohost app install https://github.com/chtixof/minchat_ynh`
+
+Upgrade: `sudo yunohost app upgrade minchat -u https://github.com/chtixof/minchat_ynh`
+CAUTION: BEFORE YOU UPGRADE, PLEASE MAKE A BACKUP OF conf/setup.ini : IT IS OVERWRITTEN (BUG)
+
 #### Otherwise
 Download, unzip and just copy the content of the `sources` folder to any folder of your web site.
 ## Setup
