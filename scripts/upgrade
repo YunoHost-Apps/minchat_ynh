@@ -13,7 +13,7 @@ final_path=/var/www/$app
 sudo mkdir -p $final_path
 sudo cp -a ../sources/* $final_path
 if [[ ! -f ${final_path}/conf/setup.ini ]] ; then
-    sudo cp ${final_path}/conf/sample/setup.ini .. 
+    sudo cp ${final_path}/conf/sample/setup.ini ${final_path}/conf/ 
 fi
 # Modify Nginx configuration file and copy it to Nginx conf directory
 sed -i "s@PATHTOCHANGE@$path@g"  ../conf/nginx.conf
