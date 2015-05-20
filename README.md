@@ -18,12 +18,11 @@ Via the admin web console, type in: <https://github.com/chtixof/minchat_ynh>
 Or on ssh : `sudo yunohost app install https://github.com/chtixof/minchat_ynh`
 
 Upgrade: `sudo yunohost app upgrade minchat -u https://github.com/chtixof/minchat_ynh`  
-CAUTION: BEFORE YOU UPGRADE, PLEASE MAKE A BACKUP OF conf/setup.ini : IT IS OVERWRITTEN (BUG)
 
 #### Otherwise
 Download, unzip and just copy the content of the `sources` folder to any folder of your web site.
 ## Setup
-The setup is optional. If you leave it as is, there is a single unnamed room, opened to all users. If you want to customize the access control, edit the file `conf/setup.ini`. The interesting parameter is `auth` that indicates which user is authorized to which room.
+The setup is optional. If you leave it as is, there is a single unnamed room, opened to all users. If you want to customize the access control, edit the file `conf/setup.ini` (if missing, copy it from `conf/sample/setup.ini`). The interesting parameter is `auth` that indicates which user is authorized to which room.
 
 In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Public,*:`,
 - `John:Game,John:Family` = John can access the Game room, the Family room 
