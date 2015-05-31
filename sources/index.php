@@ -109,6 +109,7 @@ function lienurl(s){
 }
 
             $(document).ready(function() {
+                var countIdle=0;
                 var doalert=false; // pas d'alerte au chargement init
                 var pos = 0;
                 var lastdate = 0;
@@ -123,6 +124,10 @@ function lienurl(s){
                 });
 
                 $("#submitmsg").click(function() {
+                    if (countIdle==-1) {
+                        myTimer = setInterval(loadLog, <?php echo $interval ?>);
+                        $("#asleep").remove();
+                   }                    
                     var clientmsg = $("#usermsg").val();
                     $("#usermsg").val('');
                     $("#usermsg").focus();
@@ -154,6 +159,7 @@ function lienurl(s){
                             var date;
                             var heure='';
                             var day='';
+                            var alerted= 0 ;
                             for (var k in data.data) {
                                 lastdate = data.data[k][0];
                                 date = new Date(parseInt(lastdate)*1000);
@@ -182,22 +188,33 @@ function lienurl(s){
                                  }
                               } 
                               $("#chatbox").append(html);
-                              if (doalert &&(whenal=="alyes" || ((whenal!=="alno") && !document.hasFocus()))){ 
+                              alerted = doalert &&(whenal=="alyes" || ((whenal!=="alno") && !document.hasFocus())); 
+                              if (alerted){ 
                                 alert('New message!');
                               }
                               doalert=true;   // par défaut, alerte pour les autres cas
-                               
+                              countIdle=0; 
+                            } else {
+                              if (countIdle++ > 999) {
+                                 $("#chatbox").append('<span id="asleep">No message for a long time. Gone to sleep. Wake up, please!<br></span>');
+                                 clearInterval(myTimer);
+                                 countIdle=-1; 
+                              }
+                              
                             }
                             var newscrollHeight = $("#chatbox")[0].scrollHeight;
                             if (newscrollHeight > oldscrollHeight) {
 								               $("#chatbox").scrollTop(newscrollHeight);
                             }
                             pos = data.pos;
+                            if (alerted){ 
+                              loadLog();
+                            }
                         },
                     });
                 }
                 loadLog();
-                setInterval(loadLog, <?php echo $interval ?>);	//Reload file every $interval ms
+                var myTimer = setInterval(loadLog, <?php echo $interval ?>);	//Reload file every $interval ms
 
             });
         </script>
