@@ -1,15 +1,26 @@
 #!/bin/bash
-app=minchat
 
-# The parameter $1 is the backup directory location
+# causes the shell to exit if any subcommand or pipeline returns a non-zero status
+set -eu
+
+# Source YNH helpers
+source /usr/share/yunohost/helpers
+
+app=$YNH_APP_INSTANCE_NAME
+
+# Retrieve arguments
+domain=$(ynh_app_setting_get "$app" domain)
+
+# Backup directory location for the app from where the script is executed and 
 # which will be compressed afterward
-backup_dir=$1/apps/$app
-mkdir -p $backup_dir
+backup_dir=$YNH_APP_BACKUP_DIR
 
 # Backup sources & data
-sudo cp -a /var/www/$app/. $backup_dir/sources
+ynh_backup "/var/www/${app}" "sources"
 
-# Copy Nginx and YunoHost parameters to make the script "standalone"
-sudo cp -a /etc/yunohost/apps/$app/. $backup_dir/yunohost
-domain=$(sudo yunohost app setting $app domain)
-sudo cp -a /etc/nginx/conf.d/$domain.d/$app.conf $backup_dir/nginx.conf
+# Copy Nginx conf
+sudo mkdir -p ./conf
+ynh_backup "/etc/nginx/conf.d/${domain}.d/${app}.conf" "conf/nginx.conf"
+# Copy the php-fpm conf files
+ynh_backup "/etc/php5/fpm/pool.d/${app}.conf" "php-fpm.conf"
+ynh_backup "/etc/php5/fpm/conf.d/20-${app}.ini" "php-fpm.ini"

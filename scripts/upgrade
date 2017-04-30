@@ -1,26 +1,58 @@
 #!/bin/bash
-app=minchat
 
-# Retrieve arguments
-domain=$(sudo yunohost app setting $app domain)
-path=$(sudo yunohost app setting $app path)
+# Exit on command errors and treat unset variables as an error
+set -eu
+# Source app helpers
+source ./_common
+source /usr/share/yunohost/helpers
+
+app=$YNH_APP_INSTANCE_NAME
+
+domain=$(ynh_app_setting_get "$app" domain)
+path=$(ynh_app_setting_get "$app" path)
+user=$(ynh_app_setting_get "$app" user)
+is_public=$(ynh_app_setting_get $app is_public)
+
+ynh_backup_before_upgrade	# Backup the current version of the app
+ynh_clean_setup () {
+	ynh_backup_fail_upgrade	# restore it if the upgrade fails
+}
+ynh_abort_if_errors	# Active trap pour arrêter le script si une erreur est détectée.
 
 # Remove trailing "/" for next commands
-path=${path%/}
-
-# Copy source files
-final_path=/var/www/$app
-sudo mkdir -p $final_path
-sudo cp -a ../sources/* $final_path
-if [[ ! -f ${final_path}/conf/setup.ini ]] ; then
-    sudo cp ${final_path}/conf/sample/setup.ini ${final_path}/conf/ 
+if [[ ! "$path" == "/" ]]; then
+    path=${path%/}
 fi
+
+# Create system user dedicace for this app
+ynh_system_user_create $app
+
+# Init final_path, if ever it got deleted somehow
+final_path=/var/www/$app
+
+# Clean all files and directory except the data directory 
+ynh_secure_remove $final_path
+
+# Create directory
+sudo mkdir -p $final_path
+
+# Copy files to the right place
+extract_source $final_path
+
+# Fix owner
+sudo chown -R $app: $final_path
+
 # Modify Nginx configuration file and copy it to Nginx conf directory
-sed -i "s@PATHTOCHANGE@$path@g"  ../conf/nginx.conf
-sed -i "s@WWWPATH@$final_path@g" ../conf/nginx.conf
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+ynh_nginx_config
 
-# Restart services
-sudo service nginx reload
+# Create the php-fpm pool config
+ynh_fpm_config
+
+# Set ssowat config
+if [[ $is_public -eq 1 ]]; then
+  ynh_app_setting_set "$app" unprotected_uris "/"
+fi
+
+# Reload Nginx
+sudo systemctl reload nginx
 sudo yunohost app ssowatconf
-
