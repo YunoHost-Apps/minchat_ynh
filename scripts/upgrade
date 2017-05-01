@@ -49,8 +49,12 @@ ynh_nginx_config
 ynh_fpm_config
 
 # Set ssowat config
-if [[ $is_public -eq 1 ]]; then
-  ynh_app_setting_set "$app" unprotected_uris "/"
+if [ "$is_public" = "Yes" ]; then
+	ynh_app_setting_set $app is_public 1 # Fixe is_public en booléen
+	is_public=1
+elif [ "$is_public" = "No" ]; then
+	ynh_app_setting_set $app is_public 0
+ 	is_public=0
 fi
 
 # Reload Nginx
