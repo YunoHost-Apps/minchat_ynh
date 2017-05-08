@@ -2,6 +2,12 @@
 
 # Exit on command errors and treat unset variables as an error
 set -eu
+
+if [ ! -e ._common ]; then
+	# Get file fonction if not been to the current directory
+	sudo cp ../settings/scripts/_common ./_common
+	sudo chmod a+rx _common
+fi
 # Source app helpers
 source ./_common
 source /usr/share/yunohost/helpers
