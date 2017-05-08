@@ -8,6 +8,8 @@ if [ ! -e ._common ]; then
 	sudo cp ../settings/scripts/_common ./_common
 	sudo chmod a+rx _common
 fi
+# Loads the generic functions usually used in the script
+source _common
 # Source app helpers
 source /usr/share/yunohost/helpers
 
