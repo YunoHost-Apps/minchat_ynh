@@ -47,7 +47,6 @@
                     "en": "Is it a public minchat site ?",
                     "fr": "Est-ce un site public ?"
                 },
-                "choices": ["true", "false"],
                 "default": "true"
             }
         ]
