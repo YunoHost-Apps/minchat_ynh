@@ -25,10 +25,7 @@ ynh_clean_setup () {
 }
 ynh_abort_if_errors	# Active trap pour arrêter le script si une erreur est détectée.
 
-# Remove trailing "/" for next commands
-if [[ ! "$path" == "/" ]]; then
-    path=${path%/}
-fi
+CHECK_PATH	# Checks and corrects the syntax of the path.
 
 # Create system user dedicace for this app
 ynh_system_user_create $app
