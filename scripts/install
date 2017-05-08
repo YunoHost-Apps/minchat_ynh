@@ -14,22 +14,21 @@ is_public=$YNH_APP_ARG_IS_PUBLIC
 
 app=$YNH_APP_INSTANCE_NAME
 
-# Check domain/path availability
-sudo yunohost app checkurl "${domain}${path}" -a "$app" \
-    || ynh_die "Path not available: ${domain}${path}"
+CHECK_VAR "$app" "app name not set"
 
-# Remove trailing "/" for next commands
-if [[ ! "$path" == "/" ]]; then
-    path=${path%/}
-fi
+CHECK_PATH
+
+CHECK_DOMAINPATH
+
+CHECK_FINALPATH
+
+# Create system user dedicace for this app
+ynh_system_user_create $app
 
 # Copy files to the right place
 final_path=/var/www/$app
 sudo mkdir -p $final_path
 extract_source $final_path
-
-# Create system user dedicace for this app
-ynh_system_user_create $app
 
 # Copy files to the right place with the right permissions
 final_path=/var/www/$app

@@ -10,6 +10,34 @@ ALL_QUIET () {  # Redirige la sortie standard et d'erreur dans /dev/null
   $@ > /dev/null 2>&1
 }
 
+CHECK_VAR () {  # Check variable is not empty
+# $1 = Checking variable
+# $2 = Text to display on error
+  test -n "$1" || (echo "$2" >&2 && false)
+}
+
+CHECK_PATH () { # Checks / at the beginning of the path. And his absence at the end.
+  if [ "${path:0:1}" != "/" ]; then    # If the first character is not /
+    path="/$path"    # Add / at the beginning of path
+  fi
+  if [ "${path:${#path}-1}" == "/" ] && [ ${#path} -gt 1 ]; then    # If the last character is a / and it is not the only character.
+    path="${path:0:${#path}-1}" # Delete last character
+  fi
+}
+
+CHECK_DOMAINPATH () { # Checks the availability of the path and domain.
+  sudo yunohost app checkurl $domain$path -a $app
+}
+
+CHECK_FINALPATH () {  # Checks that the destination folder is not already in use.
+  final_path=/var/www/$app
+  if [ -e "$final_path" ]
+  then
+    echo "This path already contains a folder" >&2
+    false
+  fi
+}
+
 # Substitute a string by another in a file
 #
 # usage: ynh_substitute_char string_to_find replace_string file_to_analyse
