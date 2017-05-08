@@ -3,7 +3,7 @@
 # causes the shell to exit if any subcommand or pipeline returns a non-zero status
 set -eu
 
-if [ ! -e ._common ]; then
+if [ ! -e _common ]; then
 	# Get file fonction if not been to the current directory
 	sudo cp ../settings/scripts/_common ./_common
 	sudo chmod a+rx _common
