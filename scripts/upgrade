@@ -16,7 +16,6 @@ app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get "$app" domain)
 path=$(ynh_app_setting_get "$app" path)
-user=$(ynh_app_setting_get "$app" user)
 is_public=$(ynh_app_setting_get $app is_public)
 
 ynh_backup_before_upgrade	# Backup the current version of the app
