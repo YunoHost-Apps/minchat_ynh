@@ -1,6 +1,6 @@
 MINCHAT_VERSION="1.1"
 MINCHAT_SOURCE_URL="https://github.com/wojtek77/chat/archive/master.tar.gz"
-MINCHAT_SOURCE_SHA256="1a290c8ae2d48a84457366291e1d733cddf587751c6953e12da03f511b4b7df5"
+MINCHAT_SOURCE_SHA256="4a13b56e6eee270e6db3a5c8385d83aba0fca2207b0306b46941c2e7a4ea9753"
 
 QUIET () {  # Redirige la sortie standard dans /dev/null
   $@ > /dev/null
