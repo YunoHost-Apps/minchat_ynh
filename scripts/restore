@@ -18,7 +18,6 @@ app=$YNH_APP_INSTANCE_NAME
 # Retrieve arguments
 domain=$(ynh_app_setting_get "$app" domain)
 path=$(ynh_app_setting_get "$app" path)
-user=$(ynh_app_setting_get $app allowed_users)
 is_public=$(ynh_app_setting_get $app is_public)
 
 # Check domain/path availability
