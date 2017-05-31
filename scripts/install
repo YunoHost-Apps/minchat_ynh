@@ -44,6 +44,9 @@ ynh_nginx_config
 # Create the php-fpm pool config
 ynh_fpm_config
 
+# Change owner
+sudo chown $app: -R $final_path
+
 # Set ssowat config
 if [ $is_public -eq 0 ]
 then

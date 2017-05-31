@@ -62,7 +62,7 @@ extract_source() {
   local DESTDIR=$1
     
   # retrieve and extract Minichat tarball
-  rc_tarball="${DESTDIR}/privatebin.tar.gz"
+  rc_tarball="${DESTDIR}/master.tar.gz"
   sudo wget -q -O "$rc_tarball" "$MINCHAT_SOURCE_URL" \
     || ynh_die "Unable to download source tarball"
   echo "$MINCHAT_SOURCE_SHA256 $rc_tarball" | sha256sum -c >/dev/null \
