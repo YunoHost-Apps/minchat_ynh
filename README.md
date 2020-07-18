@@ -1,4 +1,4 @@
-# MinChat for YunoHost
+# Minchat for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/minchat.svg)](https://dash.yunohost.org/appci/app/minchat) ![](https://ci-apps.yunohost.org/ci/badges/minchat.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/minchat.maintain.svg)
 
