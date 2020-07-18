@@ -1,6 +1,29 @@
-MINCHAT_VERSION="1.1"
-MINCHAT_SOURCE_URL="https://github.com/wojtek77/chat/archive/master.tar.gz"
-MINCHAT_SOURCE_SHA256="50e66895cbbda095e02a8a7375ca51c0eb589956f68a223a8217d0f4c1fe1fa6"
+#!/bin/bash
+
+#=================================================
+# COMMON VARIABLES
+#=================================================
+
+# dependencies used by the app
+pkg_dependencies="deb1 deb2 php$YNH_DEFAULT_PHP_VERSION-deb1 php$YNH_DEFAULT_PHP_VERSION-deb2"
+
+YNH_PHP_VERSION="7.3"
+
+#=================================================
+# PERSONAL HELPERS
+#=================================================
+
+#=================================================
+# EXPERIMENTAL HELPERS
+#=================================================
+
+#=================================================
+# FUTURE OFFICIAL HELPERS
+#=================================================
+
+
+
+
 
 QUIET () {  # Redirige la sortie standard dans /dev/null
   $@ > /dev/null
