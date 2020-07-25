@@ -2,6 +2,7 @@
 
 [![Integration level](https://dash.yunohost.org/integration/minchat.svg)](https://dash.yunohost.org/appci/app/minchat) ![](https://ci-apps.yunohost.org/ci/badges/minchat.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/minchat.maintain.svg)
 
+
 minchat_ynh is a free minimalist chat application packaged for [Yunohost](https://yunohost.org).
 It is based on [wojtek77/chat](https://github.com/wojtek77/chat), itself based on [Gabriel Nava's tutorial](http://code.tutsplus.com/tutorials/how-to-create-a-simple-web-based-chat-application--net-5931).
 
@@ -34,7 +35,7 @@ In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Pub
 - `*:Public` = everybody can acccess the Public room
 - `*:` = everybody  can access the unnamed room
 
-## Screen shot
+## Screenshot
 ![screenshot](https://raw.githubusercontent.com/chtixof/databank/master/minchat_ynh/minchat_ynh_screenshot01.gif)
 
 ## Hints for users
