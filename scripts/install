@@ -62,9 +62,9 @@ ynh_setup_source --dest_dir="$final_path"
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring nginx web server..." --time --weight=1
+ynh_script_progression --message="Configuring NGINX web server..." --time --weight=1
 
-# Create a dedicated nginx config
+# Create a dedicated NGINX config
 ynh_add_nginx_config
 
 #=================================================
@@ -80,10 +80,10 @@ ynh_system_user_create --username=$app
 #=================================================
 ynh_script_progression --message="Configuring PHP-fpm..." --time --weight=1
 
+phpversion=$(ynh_app_setting_get --app="$app" --key=phpversion)
+
 # Create a dedicated php-fpm config
 ynh_add_fpm_config
-
-phpversion=$(ynh_app_setting_get --app="$app" --key=phpversion)
 
 #=================================================
 # GENERIC FINALIZATION
