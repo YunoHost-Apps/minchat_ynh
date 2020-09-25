@@ -49,7 +49,7 @@ ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 #=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================
-ynh_script_progression --message="Restoring MinChat main directory..." --weight=2
+ynh_script_progression --message="Restoring Minchat main directory..." --weight=2
 
 ynh_restore_file --origin_path="$final_path"
 
@@ -88,4 +88,4 @@ ynh_systemd_action --service_name=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Restoration completed for MinChat" --last
+ynh_script_progression --message="Restoration completed for Minchat" --last

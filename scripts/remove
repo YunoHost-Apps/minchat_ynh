@@ -57,4 +57,4 @@ ynh_system_user_delete --username=$app
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Removal of MinChat completed" --last
+ynh_script_progression --message="Removal of Minchat completed" --last
