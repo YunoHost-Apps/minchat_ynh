@@ -99,9 +99,9 @@ chown -R $app: $final_path
 #=================================================
 # PHP-FPM CONFIGURATION
 #=================================================
-ynh_script_progression --message="Upgrading PHP-fpm configuration..." --weight=1
+ynh_script_progression --message="Upgrading PHP-FPM configuration..." --weight=1
 
-# Create a dedicated PHP-fpm config
+# Create a dedicated PHPFPM config
 ynh_add_fpm_config
 
 #=================================================
