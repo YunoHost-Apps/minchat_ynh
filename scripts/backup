@@ -55,4 +55,4 @@ ynh_backup --src_path="/etc/php/$phpversion/fpm/pool.d/$app.conf"
 # END OF SCRIPT
 #=================================================
 
-ynh_print_info --message="Backup script completed for $app. (YunoHost will then actually copy those files to the archive)."
+ynh_print_info --message="Backup script completed for MinChat. (YunoHost will then actually copy those files to the archive)."
