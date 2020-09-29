@@ -39,7 +39,7 @@ In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Pub
 - `*:` = everybody  can access the unnamed room
 
 ## Hints for users
-- The URLs you send are linked or transformed to images when preceeded by a !
+- The URLs you send are linked or transformed to images when preceeded by a `!`
 - If multiple rooms are allowed by the administrator in the `setup.ini`, you can have several tabs opened to different rooms in the same browser.
 
 ## Documentation
