@@ -1,33 +1,33 @@
 {
     "name": "Minchat",
     "id": "minchat",
-    "description": {
-        "en": "A minimalist web chat",
-        "fr": "Un web chat minimaliste"
-    },
     "packaging_format": 1,
-    "requirements": {
-        "yunohost": ">> 2.3.15"
+    "description": {
+        "en": "Minimalist web chat",
+        "fr": "Web chat minimaliste"
     },
+    "version": "1.0~ynh1",
+    "url": "https://github.com/wojtek77/chat",
     "license": "MIT",
     "maintainer": {
         "name": "chtixof"
     },
-    "url": "https://github.com/wojtek77/chat",
+     "requirements": {
+        "yunohost": ">> 3.8.1"
+    },
     "multi_instance": true,
     "services": [
         "nginx",
-        "php5-fpm"
+        "php7.0-fpm"
     ],
-    "license": "MIT",
     "arguments": {
         "install" : [
             {
                 "name": "domain",
                 "type": "domain",
                 "ask": {
-                    "en": "Choose a domain for minchat",
-                    "fr": "Choisissez un domaine pour minchat"
+                    "en": "Choose a domain for Minchat",
+                    "fr": "Choisissez un domaine pour Minchat"
                 },
                 "example": "domain.org"
             },
@@ -35,8 +35,8 @@
                 "name": "path",
                 "type": "path",
                 "ask": {
-                    "en": "Choose a path for minchat",
-                    "fr": "Choisissez un chemin pour minchat"
+                    "en": "Choose a path for Minchat",
+                    "fr": "Choisissez un chemin pour Minchat"
                 },
                 "example": "/minchat",
                 "default": "/minchat"
@@ -45,10 +45,10 @@
                 "name": "is_public",
                 "type": "boolean",
                 "ask": {
-                    "en": "Is it a public minchat site ?",
+                    "en": "Is it a public site?",
                     "fr": "Est-ce un site public ?"
                 },
-                "default": "true"
+                "default": true
             }
         ]
     }

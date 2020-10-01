@@ -1,0 +1,6 @@
+SOURCE_URL=https://github.com/wojtek77/chat/archive/master.tar.gz
+SOURCE_SUM=50e66895cbbda095e02a8a7375ca51c0eb589956f68a223a8217d0f4c1fe1fa6
+SOURCE_SUM_PRG=sha256sum
+SOURCE_FORMAT=tar.gz
+SOURCE_IN_SUBDIR=true
+SOURCE_FILENAME=
