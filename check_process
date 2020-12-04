@@ -16,5 +16,3 @@
 		multi_instance=1
 		incorrect_path=1
 		port_already_use=0
-;;; Levels
-	Level 5=auto
