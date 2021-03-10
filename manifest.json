@@ -6,19 +6,19 @@
         "en": "Minimalist web chat",
         "fr": "Web chat minimaliste"
     },
-    "version": "1.0~ynh2",
+    "version": "1.0~ynh3",
     "url": "https://github.com/wojtek77/chat",
     "license": "MIT",
     "maintainer": {
         "name": "chtixof"
     },
      "requirements": {
-        "yunohost": ">> 3.8.1"
+        "yunohost": ">> 4.1.7"
     },
     "multi_instance": true,
     "services": [
         "nginx",
-        "php7.0-fpm"
+        "php7.3-fpm"
     ],
     "arguments": {
         "install" : [
