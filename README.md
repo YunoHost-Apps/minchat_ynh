@@ -56,8 +56,8 @@ In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Pub
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/minchat%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/minchat/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/minchat%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/minchat/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/minchat.svg)](https://ci-apps.yunohost.org/ci/apps/minchat/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/minchat.svg)](https://ci-apps-arm.yunohost.org/ci/apps/minchat/)
 
 ## Limitations
 
