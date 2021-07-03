@@ -59,6 +59,14 @@ ynh_clean_setup () {
 ynh_abort_if_errors
 
 #=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+
+# Create a dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 
@@ -70,6 +78,10 @@ then
 	ynh_setup_source --dest_dir="$final_path"
 fi
 
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
@@ -77,21 +89,6 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app
-
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-
-# Set permissions to app files
-chown -R $app: $final_path
 
 #=================================================
 # PHP-FPM CONFIGURATION
