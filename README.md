@@ -26,7 +26,7 @@ Minchat is a free minimalist chat application. It is based on [wojtek77/chat](ht
 Example : `https://yourdomain.org/minchat/?room=Living&name=John`
 - Optionaly multi room
 
-**Shipped version:** 1.0~ynh3
+**Shipped version:** 1.0~ynh4 *(:warning: This is the `testing` branch. The [`master` branch](https://github.com/YunoHost-Apps/minchat_ynh/tree/master) used in the catalog is currently on version 1.0\~ynh3.)*
 
 
 ## Screenshots
