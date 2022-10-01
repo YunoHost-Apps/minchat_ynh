@@ -6,7 +6,7 @@
         "en": "Minimalist web chat",
         "fr": "Web chat minimaliste"
     },
-    "version": "1.0~ynh3",
+    "version": "1.0~ynh4",
     "url": "https://github.com/wojtek77/chat",
     "upstream": {
         "license": "MIT",
