@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Minchat for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/minchat.svg)](https://dash.yunohost.org/appci/app/minchat) ![Working status](https://ci-apps.yunohost.org/ci/badges/minchat.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/minchat.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/minchat.svg)](https://dash.yunohost.org/appci/app/minchat) ![Working status](https://ci-apps.yunohost.org/ci/badges/minchat.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/minchat.maintain.svg)
+
 [![Install Minchat with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=minchat)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -27,7 +28,6 @@ Example : `https://yourdomain.org/minchat/?room=Living&name=John`
 - Optionaly multi room
 
 **Shipped version:** 1.0~ynh4
-
 
 ## Screenshots
 
@@ -57,7 +57,7 @@ In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Pub
 
 * Official app website: <https://github.com/wojtek77/chat>
 * Upstream app code repository: <https://github.com/wojtek77/chat>
-* YunoHost documentation for this app: <https://yunohost.org/app_minchat>
+* YunoHost Store: <https://apps.yunohost.org/app/minchat>
 * Report a bug: <https://github.com/YunoHost-Apps/minchat_ynh/issues>
 
 ## Developer info

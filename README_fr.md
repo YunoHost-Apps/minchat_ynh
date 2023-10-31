@@ -5,15 +5,16 @@ It shall NOT be edited by hand.
 
 # Minchat pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/minchat.svg)](https://dash.yunohost.org/appci/app/minchat) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/minchat.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/minchat.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/minchat.svg)](https://dash.yunohost.org/appci/app/minchat) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/minchat.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/minchat.maintain.svg)
+
 [![Installer Minchat avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=minchat)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Minchat rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Minchat rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Minchat is a free minimalist chat application. It is based on [wojtek77/chat](https://github.com/wojtek77/chat), itself based on [Gabriel Nava's tutorial](http://code.tutsplus.com/tutorials/how-to-create-a-simple-web-based-chat-application--net-5931).
 
@@ -26,12 +27,11 @@ Minchat is a free minimalist chat application. It is based on [wojtek77/chat](ht
 Example : `https://yourdomain.org/minchat/?room=Living&name=John`
 - Optionaly multi room
 
-**Version incluse :** 1.0~ynh4
+**Version incluse :** 1.0~ynh4
 
+## Captures d’écran
 
-## Captures d'écran
-
-![Capture d'écran de Minchat](./doc/screenshots/minchat_ynh_screenshot01.gif)
+![Capture d’écran de Minchat](./doc/screenshots/minchat_ynh_screenshot01.gif)
 
 ## Avertissements / informations importantes
 
@@ -55,9 +55,9 @@ In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Pub
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://github.com/wojtek77/chat>
-* Dépôt de code officiel de l'app : <https://github.com/wojtek77/chat>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_minchat>
+* Site officiel de l’app : <https://github.com/wojtek77/chat>
+* Dépôt de code officiel de l’app : <https://github.com/wojtek77/chat>
+* YunoHost Store: <https://apps.yunohost.org/app/minchat>
 * Signaler un bug : <https://github.com/YunoHost-Apps/minchat_ynh/issues>
 
 ## Informations pour les développeurs
@@ -72,4 +72,4 @@ ou
 sudo yunohost app upgrade minchat -u https://github.com/YunoHost-Apps/minchat_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
