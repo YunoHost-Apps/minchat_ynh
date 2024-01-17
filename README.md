@@ -35,7 +35,6 @@ Example : `https://yourdomain.org/minchat/?room=Living&name=John`
 
 ## Documentation and resources
 
-* Official app website: <https://github.com/wojtek77/chat>
 * Upstream app code repository: <https://github.com/wojtek77/chat>
 * YunoHost Store: <https://apps.yunohost.org/app/minchat>
 * Report a bug: <https://github.com/YunoHost-Apps/minchat_ynh/issues>
