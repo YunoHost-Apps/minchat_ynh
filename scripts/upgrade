@@ -12,24 +12,14 @@ source /usr/share/yunohost/helpers
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Backing up configuration file..." --weight=5
-
-# Save setup.ini
-ynh_backup_if_checksum_is_different --file="$install_dir/conf/setup.ini"
-
-#=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
 ynh_script_progression --message="Upgrading source files..." --weight=5
 
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source --dest_dir="$install_dir" --full_replace=1
+ynh_setup_source --dest_dir="$install_dir" --full_replace=1 --keep="conf/setup.ini"
 
 chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
-
-ynh_store_file_checksum --file="$install_dir/conf/setup.ini"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS

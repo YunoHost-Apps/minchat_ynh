@@ -20,8 +20,6 @@ ynh_setup_source --dest_dir="$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
-ynh_store_file_checksum --file="$install_dir/conf/setup.ini"
-
 #=================================================
 # SYSTEM CONFIGURATION
 #=================================================
