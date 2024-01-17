@@ -16,16 +16,16 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
-Minchat is a free minimalist chat application. It is based on [wojtek77/chat](https://github.com/wojtek77/chat), itself based on [Gabriel Nava's tutorial](http://code.tutsplus.com/tutorials/how-to-create-a-simple-web-based-chat-application--net-5931).
+Minchat est une application de chat minimaliste. Elle est basé sur [wojtek77/chat](https://github.com/wojtek77/chat), elle-même basé sur [le tutoriel de Gabriel Nava](http://code.tutsplus.com/tutorials/how-to-create- une-simple-application-de-chat-basée sur le Web--net-5931).
 
-### Features
+### Caractéristiques
 
-- Simple web chat: only requires a browser ; no XMPP application.
-- No need for users to register. Just need the web address. But optional authorisation control.
-- On connection, the page is fed with the messages of the day
-- Args are in the URL as *get* arguments, so that you can share the URL or make it a favorite to avoid filling a form.  
-Example : `https://yourdomain.org/minchat/?room=Living&name=John`
-- Optionaly multi room
+- Chat Web simple : nécessite uniquement un navigateur ; pas d'application XMPP.
+- Pas besoin de s'inscrire pour les utilisateurs. J'ai juste besoin de l'adresse Web. Mais contrôle d'autorisation facultatif.
+- À la connexion, la page est alimentée avec les messages du jour
+- Les arguments sont dans l'URL en tant qu'arguments *get*, afin que vous puissiez partager l'URL ou en faire un favori pour éviter de remplir un formulaire.
+Exemple : `https://__DOMAIN____PATH__/minchat/?room=Living&name=John`
+- En option multi-pièces
 
 **Version incluse :** 1.0~ynh4
 

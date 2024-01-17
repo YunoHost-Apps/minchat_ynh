@@ -1,6 +1,6 @@
 ### Setup
 
-The setup is optional. If you leave it as is, there is a single unnamed room, opened to all users. If you want to customize the access control, edit the file `conf/setup.ini` (if missing, copy it from `conf/sample/setup.ini`). The interesting parameter is `auth` that indicates which user is authorized to which room.
+The setup is optional. If you leave it as is, there is a single unnamed room, opened to all users. If you want to customize the access control, edit the file `__INSTALL_DIR__/conf/setup.ini` (if missing, copy it from `__INSTALL_DIR__/conf/sample/setup.ini`). The interesting parameter is `auth` that indicates which user is authorized to which room.
 
 In this example `auth = John:Game,John:Family,Mary:Game,Tim:Family,admin:*,*:Public,*:`:
 

@@ -6,5 +6,5 @@ Minchat is a free minimalist chat application. It is based on [wojtek77/chat](ht
 - No need for users to register. Just need the web address. But optional authorisation control.
 - On connection, the page is fed with the messages of the day
 - Args are in the URL as *get* arguments, so that you can share the URL or make it a favorite to avoid filling a form.  
-Example : `https://yourdomain.org/minchat/?room=Living&name=John`
+Example : `https://__DOMAIN____PATH__/minchat/?room=Living&name=John`
 - Optionaly multi room
