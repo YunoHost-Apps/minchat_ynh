@@ -27,7 +27,7 @@ Minchat is a free minimalist chat application. It is based on [wojtek77/chat](ht
 Example : `https://__DOMAIN____PATH__/minchat/?room=Living&name=John`
 - Optionaly multi room
 
-**Shipped version:** 1.0~ynh4
+**Shipped version:** 2017.05.30~ynh1
 
 ## Screenshots
 

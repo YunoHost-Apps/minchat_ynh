@@ -27,7 +27,7 @@ Minchat est une application de chat minimaliste. Elle est basé sur [wojtek77/ch
 Exemple : `https://__DOMAIN____PATH__/minchat/?room=Living&name=John`
 - En option multi-pièces
 
-**Version incluse :** 1.0~ynh4
+**Version incluse :** 2017.05.30~ynh1
 
 ## Captures d’écran
 

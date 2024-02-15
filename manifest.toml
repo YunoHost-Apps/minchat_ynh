@@ -7,7 +7,7 @@ name = "Minchat"
 description.en = "Minimalist web chat"
 description.fr = "Web chat minimaliste"
 
-version = "1.0~ynh4"
+version = "2017.05.30~ynh1"
 
 maintainers = ["chtixof"]
 
@@ -39,8 +39,8 @@ ram.runtime = "100M"
 
 [resources]
     [resources.sources.main]
-    url = "https://github.com/wojtek77/chat/archive/master.tar.gz"
-    sha256 = "50e66895cbbda095e02a8a7375ca51c0eb589956f68a223a8217d0f4c1fe1fa6"
+    url = "https://github.com/wojtek77/chat/archive/368fdb3451e1c46b530dc239d9ce522edc6fb812.tar.gz"
+    sha256 = "f1809fea5d7eed3d0dbac9715e3f756bd710d08ee8060008f8ca285e03fe04eb"
 
     autoupdate.strategy = "latest_github_commit"
     autoupdate.asset = "tarball"
