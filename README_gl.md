@@ -33,6 +33,10 @@ Example : `https://__DOMAIN____PATH__/minchat/?room=Living&name=John`
 
 ![Captura de pantalla de Minchat](./doc/screenshots/minchat_ynh_screenshot01.gif)
 
+## :red_circle: Debes considerar
+
+- **Upstream not maintained**: This software is not maintained anymore. Expect it to break down over time, be exposed to unfixed security breaches, etc.
+
 ## Documentación e recursos
 
 - Repositorio de orixe do código: <https://github.com/wojtek77/chat>
